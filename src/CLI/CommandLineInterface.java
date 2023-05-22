@@ -42,19 +42,29 @@ public class CommandLineInterface {
                 commandService.createJedi(tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6]);
                 break;
             case "removejedi":
-                commandService.removeJedi(tokens[1],tokens[2]);
+                commandService.removeJedi(tokens[1], tokens[2]);
                 break;
             case "getstrongestjedi":
                 commandService.getStrongestJedi(tokens[1]);
                 break;
             case "promotejedi":
-                commandService.promoteJedi(tokens[1],tokens[2]);
+                commandService.promoteJedi(tokens[1], tokens[2]);
                 break;
             case "demotejedi":
-                commandService.demoteJedi(tokens[1],tokens[2]);
+                commandService.demoteJedi(tokens[1], tokens[2]);
                 break;
             case "getyoungestjedi":
-                commandService.getYoungestJedi(tokens[1],tokens[2]);
+                commandService.getYoungestJedi(tokens[1], tokens[2]);
+                break;
+            case "getmostusedsabercolor":
+                try {
+                    commandService.getMostUsedSaberColor(tokens[1], tokens[2]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    commandService.getMostUsedSaberColor(tokens[1]);
+                }
+                break;
+            case "print":
+                commandService.printPlanet(tokens[1]);
                 break;
             case "exit":
                 return false;

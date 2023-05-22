@@ -1,6 +1,7 @@
 package commands;
 
 import EnumHandler.RankHandler;
+import comparator.JediComparator;
 import enums.CelestialType;
 import enums.Ranks;
 import enums.SaberColors;
@@ -164,23 +165,73 @@ public class CommandService {
     }
 
     public void getMostUsedSaberColor(String planetName) {
+        Map<SaberColors, Integer> saberColorsCounts = new HashMap<>();
+        for (CelestialObject celestialObject : galaxy.getCelestialObjectSet()) {
+            if (celestialObject.getName().equals(planetName)) {
+                for (Jedi jedi : celestialObject.getJedis()) {
+                    if (jedi.getRank().equals(Ranks.GRAND_MASTER)) {
+                        SaberColors saberColor = jedi.getSaberColor();
+                        saberColorsCounts.put(saberColor, saberColorsCounts.getOrDefault(saberColor, 0) + 1);
+                    }
+                }
+            }
+        }
+        SaberColors mostUsedSaberColor = null;
+        int maxCount = 0;
+        for (Map.Entry<SaberColors, Integer> entry : saberColorsCounts.entrySet()) {
+            SaberColors saberColors = entry.getKey();
+            int count = entry.getValue();
+            if (count > maxCount) {
+                mostUsedSaberColor = saberColors;
+                maxCount = count;
+            }
+        }
+        if (mostUsedSaberColor == null) {
+            System.out.println("No Jedi found with the specified planet and rank.");
+        }
+        System.out.println("Most used saber color between jedis with rank GRAND_MASTER on the selected planet: " + mostUsedSaberColor);
     }
 
     public void getMostUsedSaberColor(String planetName, String rank) throws Exception {
+        Map<SaberColors, Integer> saberColorsCounts = new HashMap<>();
         Ranks parsedRank = (Ranks) enumParser(rank, Ranks.values(), Ranks.class);
         for (CelestialObject celestialObject : galaxy.getCelestialObjectSet()) {
             if (celestialObject.getName().equals(planetName)) {
                 for (Jedi jedi : celestialObject.getJedis()) {
                     if (jedi.getRank().equals(parsedRank)) {
-
+                        SaberColors saberColor = jedi.getSaberColor();
+                        saberColorsCounts.put(saberColor, saberColorsCounts.getOrDefault(saberColor, 0) + 1);
                     }
                 }
             }
         }
+        SaberColors mostUsedSaberColor = null;
+        int maxCount = 0;
+        for (Map.Entry<SaberColors, Integer> entry : saberColorsCounts.entrySet()) {
+            SaberColors saberColors = entry.getKey();
+            int count = entry.getValue();
+            if (count > maxCount) {
+                mostUsedSaberColor = saberColors;
+                maxCount = count;
+            }
+        }
+        if (mostUsedSaberColor == null) {
+            System.out.println("No Jedi found with the specified planet and rank.");
+        }
+        System.out.println("Most used saber color between jedis on the selected planet: " + mostUsedSaberColor);
     }
 
     public void printPlanet(String planetName) {
-
+        JediComparator jediComparator = new JediComparator();
+        for (CelestialObject celestialObject : galaxy.getCelestialObjectSet()) {
+            if (celestialObject.getName().equals(planetName)) {
+                List<Jedi> jediList = new ArrayList<>(celestialObject.getJedis());
+                jediList.sort(jediComparator);
+                for (Jedi jedi: jediList) {
+                    System.out.println(jedi);
+                }
+            }
+        }
     }
 
     public void printJedi(String jediName) {

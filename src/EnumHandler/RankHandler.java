@@ -4,45 +4,26 @@ import enums.Ranks;
 
 public class RankHandler {
     public Ranks getNextRank(Ranks currentRank) {
-        switch (currentRank) {
-            case YOUNGLING:
-                return Ranks.INITIATE;
-            case INITIATE:
-                return Ranks.PADAWAN;
-            case PADAWAN:
-                return Ranks.KNIGHT_ASPIRANT;
-            case KNIGHT_ASPIRANT:
-                return Ranks.KNIGHT;
-            case KNIGHT:
-                return Ranks.MASTER;
-            case MASTER:
-                return Ranks.BATTLE_MASTER;
-            case BATTLE_MASTER:
-                return Ranks.GRAND_MASTER;
-            case GRAND_MASTER:
-            default:
-                return null;
-        }
+        return switch (currentRank) {
+            case YOUNGLING -> Ranks.INITIATE;
+            case INITIATE -> Ranks.PADAWAN;
+            case PADAWAN -> Ranks.KNIGHT_ASPIRANT;
+            case KNIGHT_ASPIRANT -> Ranks.KNIGHT;
+            case KNIGHT -> Ranks.MASTER;
+            case MASTER -> Ranks.BATTLE_MASTER;
+            default -> Ranks.GRAND_MASTER;
+        };
     }
+
     public Ranks getDemotedRank(Ranks currentRank) {
-        switch (currentRank) {
-            case GRAND_MASTER:
-                return Ranks.BATTLE_MASTER;
-            case BATTLE_MASTER:
-                return Ranks.MASTER;
-            case MASTER:
-                return Ranks.KNIGHT;
-            case KNIGHT:
-                return Ranks.KNIGHT_ASPIRANT;
-            case KNIGHT_ASPIRANT:
-                return Ranks.PADAWAN;
-            case PADAWAN:
-                return Ranks.INITIATE;
-            case INITIATE:
-                return Ranks.YOUNGLING;
-            case YOUNGLING:
-            default:
-                return null;
-        }
+        return switch (currentRank) {
+            case GRAND_MASTER -> Ranks.BATTLE_MASTER;
+            case BATTLE_MASTER -> Ranks.MASTER;
+            case MASTER -> Ranks.KNIGHT;
+            case KNIGHT -> Ranks.KNIGHT_ASPIRANT;
+            case KNIGHT_ASPIRANT -> Ranks.PADAWAN;
+            case PADAWAN -> Ranks.INITIATE;
+            default -> Ranks.YOUNGLING;
+        };
     }
 }

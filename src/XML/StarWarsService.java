@@ -1,3 +1,5 @@
+package XML;
+
 import XML.XMLParser;
 import models.Galaxy;
 
