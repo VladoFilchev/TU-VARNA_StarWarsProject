@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<galaxy>
+    <CelestialObject>
+        <name>Pluto</name>
+        <celestialType>MOON</celestialType>
+        <jedis>
+            <name>Anakin</name>
+            <age>5</age>
+            <rank>MASTER</rank>
+            <saberColor>BLACK</saberColor>
+            <power>6000.0</power>
+        </jedis>
+    </CelestialObject>
+</galaxy>
