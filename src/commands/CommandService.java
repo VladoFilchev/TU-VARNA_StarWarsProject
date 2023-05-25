@@ -85,13 +85,12 @@ public class CommandService {
                         jedi.setRank(nextRank);
                         jedi.setPower(currentPower += parseMultiplier * currentPower);
                         System.out.println("Jedi promoted to " + nextRank);
-                    } else {
-                        System.out.println("Unable to promote jedi " + jediName + " already the highest rank");
                     }
                 } else {
-                    System.out.println("Jedi with name " + jediName + " not found!");
+                        System.out.println("Unable to promote jedi " + jediName + " already the highest rank");
                 }
             }
+            System.out.println("Jedi with name " + jediName + " not found!");
         }
     }
 
@@ -108,13 +107,12 @@ public class CommandService {
                         jedi.setRank(nextRank);
                         jedi.setPower(currentPower -= parseMultiplier * currentPower);
                         System.out.println("Jedi demoted to " + nextRank);
-                    } else {
-                        System.out.println("Unable to demote jedi " + jediName);
                     }
                 } else {
-                    System.out.println("Jedi with name " + jediName + " not found!");
+                        System.out.println("Unable to demote jedi " + jediName);
                 }
             }
+            System.out.println("Jedi with name " + jediName + " not found!");
         }
     }
 
@@ -227,7 +225,7 @@ public class CommandService {
             if (celestialObject.getName().equals(planetName)) {
                 List<Jedi> jediList = new ArrayList<>(celestialObject.getJedis());
                 jediList.sort(jediComparator);
-                for (Jedi jedi: jediList) {
+                for (Jedi jedi : jediList) {
                     System.out.println(jedi);
                 }
             }
@@ -235,28 +233,52 @@ public class CommandService {
     }
 
     public void printJedi(String jediName) {
-
+        for (CelestialObject celestialObject : galaxy.getCelestialObjectSet()) {
+            for (Jedi jedi : celestialObject.getJedis()) {
+                if (jedi.getName().equals(jediName)) {
+                    System.out.println(jedi);
+                    System.out.println(celestialObject.getName());
+                }
+            }
+        }
     }
 
     public void compareCitizens(String firstPlanetName, String secondPlanetName) {
-
+        JediComparator jediComparator = new JediComparator();
+        for (CelestialObject celestialObject : galaxy.getCelestialObjectSet()) {
+            if (celestialObject.getName().equals(firstPlanetName)) {
+                for (CelestialObject celestialObject1 : galaxy.getCelestialObjectSet()) {
+                    if (celestialObject1.getName().equals(secondPlanetName)) {
+                        List<Jedi> jediList = new ArrayList<>(celestialObject.getJedis());
+                        List<Jedi> jediList1 = new ArrayList<>(celestialObject1.getJedis());
+                        List<Jedi> combinedList = new ArrayList<>();
+                        combinedList.addAll(jediList);
+                        combinedList.addAll(jediList1);
+                        combinedList.sort(jediComparator);
+                        for (Jedi jedi : combinedList) {
+                            System.out.println(jedi);
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    public void help() {
-        System.out.println("Welcome to the Star Wars Universe:" +
-                "\naddplanet <planetName> <celestialType>" +
-                "\ncreatejedi <planetName> <jediName> <jediAge> <jediRank> <saberColor> <jediStrength>" +
-                "\nremovejedi <jediName> <planetName>" +
-                "\npromotejedi <jediName> <multiplier>" +
-                "\ndemotejedi <jediName> <multiplier>" +
-                "\ngetstrongestjedi <planetName>" +
-                "\ngetmostusedsabercolor <planetName> <jediRank>" +
-                "\ngetmostusedsabercolor <planetName>" +
-                "\nprintplanet <planetName>" +
-                "\nprintjedi <jediName>" +
-                "\ncomparecitizens <firstPlanet> <secondPlanet" +
-                "\ngetyoungestjedi <planetName> <jediRank>");
+        public void help () {
+            System.out.println("Welcome to the Star Wars Universe:" +
+                    "\naddplanet <planetName> <celestialType>" +
+                    "\ncreatejedi <planetName> <jediName> <jediAge> <jediRank> <saberColor> <jediStrength>" +
+                    "\nremovejedi <jediName> <planetName>" +
+                    "\npromotejedi <jediName> <multiplier>" +
+                    "\ndemotejedi <jediName> <multiplier>" +
+                    "\ngetstrongestjedi <planetName>" +
+                    "\ngetmostusedsabercolor <planetName> <jediRank>" +
+                    "\ngetmostusedsabercolor <planetName>" +
+                    "\nprint <planetName>" +
+                    "\nprint <jediName>" +
+                    "\ncomparecitizens <firstPlanet> <secondPlanet" +
+                    "\ngetyoungestjedi <planetName> <jediRank>");
+        }
+
+
     }
-
-
-}

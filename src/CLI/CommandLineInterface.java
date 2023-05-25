@@ -66,6 +66,12 @@ public class CommandLineInterface {
             case "print":
                 commandService.printPlanet(tokens[1]);
                 break;
+            case "printJ":
+                commandService.printJedi(tokens[1]);
+                break;
+            case "comparecitizens":
+                commandService.compareCitizens(tokens[1],tokens[2]);
+                break;
             case "exit":
                 return false;
             default:
