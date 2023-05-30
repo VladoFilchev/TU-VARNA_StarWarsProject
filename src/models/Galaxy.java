@@ -11,7 +11,7 @@ import java.util.Set;
 @XmlRootElement
 public class Galaxy {
     @XmlTransient
-    private Set<CelestialObject> celestialObjectSet;
+    private final Set<CelestialObject> celestialObjectSet;
 
     public Galaxy() {
         this.celestialObjectSet = new HashSet<>();
@@ -21,9 +21,6 @@ public class Galaxy {
         return celestialObjectSet.add(celestialObject);
     }
 
-    public boolean removeCelestialObject(CelestialObject celestialObject) {
-        return celestialObjectSet.remove(celestialObject);
-    }
 
     @XmlElement(name = "CelestialObject")
     public Set<CelestialObject> getCelestialObjectSet() {

@@ -37,16 +37,8 @@ public class Jedi {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getAge() {
         return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public Ranks getRank() {
@@ -59,10 +51,6 @@ public class Jedi {
 
     public SaberColors getSaberColor() {
         return saberColor;
-    }
-
-    public void setSaberColor(SaberColors saberColor) {
-        this.saberColor = saberColor;
     }
 
     public double getPower() {

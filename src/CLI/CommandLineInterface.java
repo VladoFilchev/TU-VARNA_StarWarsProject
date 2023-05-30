@@ -32,51 +32,32 @@ public class CommandLineInterface {
 
 
         switch (action) {
-            case "help":
-                commandService.help();
-                break;
-            case "addplanet":
-                commandService.addPlanet(tokens[1], tokens[2]);
-                break;
-            case "createjedi":
-                commandService.createJedi(tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6]);
-                break;
-            case "removejedi":
-                commandService.removeJedi(tokens[1], tokens[2]);
-                break;
-            case "getstrongestjedi":
-                commandService.getStrongestJedi(tokens[1]);
-                break;
-            case "promotejedi":
-                commandService.promoteJedi(tokens[1], tokens[2]);
-                break;
-            case "demotejedi":
-                commandService.demoteJedi(tokens[1], tokens[2]);
-                break;
-            case "getyoungestjedi":
-                commandService.getYoungestJedi(tokens[1], tokens[2]);
-                break;
-            case "getmostusedsabercolor":
+            case "help" -> commandService.help();
+            case "addplanet" -> commandService.addPlanet(tokens[1], tokens[2]);
+            case "createjedi" ->
+                    commandService.createJedi(tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6]);
+            case "removejedi" -> commandService.removeJedi(tokens[1], tokens[2]);
+            case "getstrongestjedi" -> commandService.getStrongestJedi(tokens[1]);
+            case "promotejedi" -> commandService.promoteJedi(tokens[1], tokens[2]);
+            case "demotejedi" -> commandService.demoteJedi(tokens[1], tokens[2]);
+            case "getyoungestjedi" -> commandService.getYoungestJedi(tokens[1], tokens[2]);
+            case "getmostusedsabercolor" -> {
                 try {
                     commandService.getMostUsedSaberColor(tokens[1], tokens[2]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     commandService.getMostUsedSaberColor(tokens[1]);
                 }
-                break;
-            case "print":
-                commandService.printPlanet(tokens[1]);
-                break;
-            case "printJ":
-                commandService.printJedi(tokens[1]);
-                break;
-            case "comparecitizens":
-                commandService.compareCitizens(tokens[1],tokens[2]);
-                break;
-            case "exit":
+            }
+            case "print" -> commandService.print(tokens[1]);
+            case "comparecitizens" -> commandService.compareCitizens(tokens[1], tokens[2]);
+            case "open" -> commandService.open(tokens[1]);
+            case "close" -> commandService.close();
+            case "save" -> commandService.save();
+            case "saveas" -> commandService.saveAs(tokens[1]);
+            case "exit" -> {
                 return false;
-            default:
-                System.out.println("Unknown command: " + action);
-                break;
+            }
+            default -> System.out.println("Unknown command: " + action);
         }
         return true;
     }

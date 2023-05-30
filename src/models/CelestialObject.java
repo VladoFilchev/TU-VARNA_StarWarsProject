@@ -17,7 +17,7 @@ public class CelestialObject {
     @XmlElement
     private CelestialType celestialType;
     @XmlTransient
-    private Set<Jedi> jedis;
+    private final Set<Jedi> jedis;
 
     public CelestialObject() {
         this.jedis = new HashSet<>();
@@ -33,18 +33,10 @@ public class CelestialObject {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @XmlElement
 
     public Set<Jedi> getJedis() {
         return jedis;
-    }
-
-    public void setJedis(Set<Jedi> jedis) {
-        this.jedis = jedis;
     }
 
     @Override
